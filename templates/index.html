@@ -4,30 +4,84 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Medical Diagnosis System</title>
-    <!-- Link to external CSS file -->
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>Medical Diagnosis System</h1>
-    <form method="POST" action="/predict">
-        <label for="age">Age:</label>
-        <input type="text" id="age" name="age" placeholder="Enter age" required>
+    <div class="container">
+        <h1>Medical Diagnosis System</h1>
+        <p>Enter the patient's data below to predict the likelihood of a medical condition.</p>
 
-        <label for="bp">Blood Pressure:</label>
-        <input type="text" id="bp" name="bp" placeholder="Enter blood pressure" required>
+        <form method="POST" action="/predict">
+            <div class="form-group">
+                <label for="age">Age (40–95):</label>
+                <input type="number" id="age" name="age" placeholder="Enter age" min="40" max="95" required>
+            </div>
 
-        <label for="cholesterol">Cholesterol:</label>
-        <input type="text" id="cholesterol" name="cholesterol" placeholder="Enter cholesterol level" required>
+            <div class="form-group">
+                <label for="anaemia">Anaemia (0 or 1):</label>
+                <input type="number" id="anaemia" name="anaemia" placeholder="0 = No, 1 = Yes" min="0" max="1" required>
+            </div>
 
-        <label for="serum">Serum Creatinine:</label>
-        <input type="text" id="serum" name="serum" placeholder="Enter serum creatinine level" required>
+            <div class="form-group">
+                <label for="creatinine_phosphokinase">Creatinine Phosphokinase (23–7861):</label>
+                <input type="number" id="creatinine_phosphokinase" name="creatinine_phosphokinase" placeholder="Enter CPK level" min="23" max="7861" required>
+            </div>
 
-        <button type="submit">Predict</button>
-    </form>
+            <div class="form-group">
+                <label for="diabetes">Diabetes (0 or 1):</label>
+                <input type="number" id="diabetes" name="diabetes" placeholder="0 = No, 1 = Yes" min="0" max="1" required>
+            </div>
 
-    <h3>{{ prediction_text }}</h3>
-    <h3>{{ probability_text }}</h3>
+            <div class="form-group">
+                <label for="ejection_fraction">Ejection Fraction (14–80):</label>
+                <input type="number" id="ejection_fraction" name="ejection_fraction" placeholder="Enter EF percentage" min="14" max="80" required>
+            </div>
+
+            <div class="form-group">
+                <label for="high_blood_pressure">High Blood Pressure (0 or 1):</label>
+                <input type="number" id="high_blood_pressure" name="high_blood_pressure" placeholder="0 = No, 1 = Yes" min="0" max="1" required>
+            </div>
+
+            <div class="form-group">
+                <label for="platelets">Platelets (25,000–850,000):</label>
+                <input type="number" id="platelets" name="platelets" placeholder="Enter platelet count" min="25000" max="850000" required>
+            </div>
+
+            <div class="form-group">
+                <label for="serum_creatinine">Serum Creatinine (0.5–9.4):</label>
+                <input type="number" id="serum_creatinine" name="serum_creatinine" placeholder="Enter creatinine level" step="0.1" min="0.5" max="9.4" required>
+            </div>
+
+            <div class="form-group">
+                <label for="serum_sodium">Serum Sodium (113–148):</label>
+                <input type="number" id="serum_sodium" name="serum_sodium" placeholder="Enter sodium level" min="113" max="148" required>
+            </div>
+
+            <div class="form-group">
+                <label for="sex">Sex (0 or 1):</label>
+                <input type="number" id="sex" name="sex" placeholder="0 = Female, 1 = Male" min="0" max="1" required>
+            </div>
+
+            <div class="form-group">
+                <label for="smoking">Smoking (0 or 1):</label>
+                <input type="number" id="smoking" name="smoking" placeholder="0 = No, 1 = Yes" min="0" max="1" required>
+            </div>
+
+            <div class="form-group">
+                <label for="time">Time (4–285):</label>
+                <input type="number" id="time" name="time" placeholder="Enter follow-up days" min="4" max="285" required>
+            </div>
+
+            <button type="submit">Predict</button>
+        </form>
+
+        <div class="result">
+            <h3>{{ prediction_text }}</h3>
+            <h3>{{ probability_text }}</h3>
+        </div>
+    </div>
 </body>
 </html>
+
 
 
