@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medical Diagnosis System</title>
+    <!-- Link to external CSS file -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Medical Diagnosis System</h1>
+    <form method="POST" action="/predict">
+        <label for="age">Age:</label>
+        <input type="text" id="age" name="age" placeholder="Enter age" required>
+
+        <label for="bp">Blood Pressure:</label>
+        <input type="text" id="bp" name="bp" placeholder="Enter blood pressure" required>
+
+        <label for="cholesterol">Cholesterol:</label>
+        <input type="text" id="cholesterol" name="cholesterol" placeholder="Enter cholesterol level" required>
+
+        <label for="serum">Serum Creatinine:</label>
+        <input type="text" id="serum" name="serum" placeholder="Enter serum creatinine level" required>
+
+        <button type="submit">Predict</button>
+    </form>
+
+    <h3>{{ prediction_text }}</h3>
+    <h3>{{ probability_text }}</h3>
+</body>
+</html>
+
+
