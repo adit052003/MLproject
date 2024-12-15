@@ -4,82 +4,113 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Medical Diagnosis System</title>
-    <link rel="stylesheet" href="styles.css">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome (for icons) -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f9f9f9;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            margin-top: 50px;
+        }
+        .card {
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #4CAF50;
+        }
+        button {
+            background-color: #4CAF50;
+            border: none;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .alert {
+            font-size: 1.2rem;
+        }
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            color: #666;
+            font-size: 0.9rem;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
-        <h1>Medical Diagnosis System</h1>
-        <p>Enter the patient's data below to predict the likelihood of a medical condition.</p>
-
-        <form method="POST" action="/predict">
-            <div class="form-group">
-                <label for="age">Age (40–95):</label>
-                <input type="number" id="age" name="age" placeholder="Enter age" min="40" max="95" required>
+        <div class="card p-4">
+            <h1 class="text-center">Medical Diagnosis System</h1>
+            <p class="text-center text-muted">Enter patient data below to predict the likelihood of a medical condition.</p>
+            <form method="POST" action="/predict">
+                <div class="mb-3">
+                    <label for="age" class="form-label"><i class="fas fa-user"></i> Age (40–95):</label>
+                    <input type="number" class="form-control" id="age" name="age" placeholder="Enter age" min="40" max="95" required>
+                </div>
+                <div class="mb-3">
+                    <label for="anaemia" class="form-label"><i class="fas fa-heartbeat"></i> Anaemia (0 or 1):</label>
+                    <input type="number" class="form-control" id="anaemia" name="anaemia" placeholder="0 = No, 1 = Yes" min="0" max="1" required>
+                </div>
+                <div class="mb-3">
+                    <label for="creatinine_phosphokinase" class="form-label"><i class="fas fa-vial"></i> Creatinine Phosphokinase (23–7861):</label>
+                    <input type="number" class="form-control" id="creatinine_phosphokinase" name="creatinine_phosphokinase" placeholder="Enter CPK level" min="23" max="7861" required>
+                </div>
+                <div class="mb-3">
+                    <label for="diabetes" class="form-label"><i class="fas fa-syringe"></i> Diabetes (0 or 1):</label>
+                    <input type="number" class="form-control" id="diabetes" name="diabetes" placeholder="0 = No, 1 = Yes" min="0" max="1" required>
+                </div>
+                <div class="mb-3">
+                    <label for="ejection_fraction" class="form-label"><i class="fas fa-heart"></i> Ejection Fraction (14–80):</label>
+                    <input type="number" class="form-control" id="ejection_fraction" name="ejection_fraction" placeholder="Enter EF percentage" min="14" max="80" required>
+                </div>
+                <div class="mb-3">
+                    <label for="high_blood_pressure" class="form-label"><i class="fas fa-tint"></i> High Blood Pressure (0 or 1):</label>
+                    <input type="number" class="form-control" id="high_blood_pressure" name="high_blood_pressure" placeholder="0 = No, 1 = Yes" min="0" max="1" required>
+                </div>
+                <div class="mb-3">
+                    <label for="platelets" class="form-label"><i class="fas fa-dna"></i> Platelets (25,000–850,000):</label>
+                    <input type="number" class="form-control" id="platelets" name="platelets" placeholder="Enter platelet count" min="25000" max="850000" required>
+                </div>
+                <div class="mb-3">
+                    <label for="serum_creatinine" class="form-label"><i class="fas fa-flask"></i> Serum Creatinine (0.5–9.4):</label>
+                    <input type="number" class="form-control" id="serum_creatinine" name="serum_creatinine" placeholder="Enter creatinine level" step="0.1" min="0.5" max="9.4" required>
+                </div>
+                <div class="mb-3">
+                    <label for="serum_sodium" class="form-label"><i class="fas fa-vials"></i> Serum Sodium (113–148):</label>
+                    <input type="number" class="form-control" id="serum_sodium" name="serum_sodium" placeholder="Enter sodium level" min="113" max="148" required>
+                </div>
+                <div class="mb-3">
+                    <label for="sex" class="form-label"><i class="fas fa-venus-mars"></i> Sex (0 or 1):</label>
+                    <input type="number" class="form-control" id="sex" name="sex" placeholder="0 = Female, 1 = Male" min="0" max="1" required>
+                </div>
+                <div class="mb-3">
+                    <label for="smoking" class="form-label"><i class="fas fa-smoking"></i> Smoking (0 or 1):</label>
+                    <input type="number" class="form-control" id="smoking" name="smoking" placeholder="0 = No, 1 = Yes" min="0" max="1" required>
+                </div>
+                <div class="mb-3">
+                    <label for="time" class="form-label"><i class="fas fa-clock"></i> Time (4–285):</label>
+                    <input type="number" class="form-control" id="time" name="time" placeholder="Enter follow-up days" min="4" max="285" required>
+                </div>
+                <button type="submit" class="btn btn-primary w-100">Predict</button>
+            </form>
+            <div class="mt-4 text-center">
+                <div class="alert alert-info" role="alert">
+                    {{ prediction_text }}
+                    <br>
+                    {{ probability_text }}
+                </div>
             </div>
-
-            <div class="form-group">
-                <label for="anaemia">Anaemia (0 or 1):</label>
-                <input type="number" id="anaemia" name="anaemia" placeholder="0 = No, 1 = Yes" min="0" max="1" required>
-            </div>
-
-            <div class="form-group">
-                <label for="creatinine_phosphokinase">Creatinine Phosphokinase (23–7861):</label>
-                <input type="number" id="creatinine_phosphokinase" name="creatinine_phosphokinase" placeholder="Enter CPK level" min="23" max="7861" required>
-            </div>
-
-            <div class="form-group">
-                <label for="diabetes">Diabetes (0 or 1):</label>
-                <input type="number" id="diabetes" name="diabetes" placeholder="0 = No, 1 = Yes" min="0" max="1" required>
-            </div>
-
-            <div class="form-group">
-                <label for="ejection_fraction">Ejection Fraction (14–80):</label>
-                <input type="number" id="ejection_fraction" name="ejection_fraction" placeholder="Enter EF percentage" min="14" max="80" required>
-            </div>
-
-            <div class="form-group">
-                <label for="high_blood_pressure">High Blood Pressure (0 or 1):</label>
-                <input type="number" id="high_blood_pressure" name="high_blood_pressure" placeholder="0 = No, 1 = Yes" min="0" max="1" required>
-            </div>
-
-            <div class="form-group">
-                <label for="platelets">Platelets (25,000–850,000):</label>
-                <input type="number" id="platelets" name="platelets" placeholder="Enter platelet count" min="25000" max="850000" required>
-            </div>
-
-            <div class="form-group">
-                <label for="serum_creatinine">Serum Creatinine (0.5–9.4):</label>
-                <input type="number" id="serum_creatinine" name="serum_creatinine" placeholder="Enter creatinine level" step="0.1" min="0.5" max="9.4" required>
-            </div>
-
-            <div class="form-group">
-                <label for="serum_sodium">Serum Sodium (113–148):</label>
-                <input type="number" id="serum_sodium" name="serum_sodium" placeholder="Enter sodium level" min="113" max="148" required>
-            </div>
-
-            <div class="form-group">
-                <label for="sex">Sex (0 or 1):</label>
-                <input type="number" id="sex" name="sex" placeholder="0 = Female, 1 = Male" min="0" max="1" required>
-            </div>
-
-            <div class="form-group">
-                <label for="smoking">Smoking (0 or 1):</label>
-                <input type="number" id="smoking" name="smoking" placeholder="0 = No, 1 = Yes" min="0" max="1" required>
-            </div>
-
-            <div class="form-group">
-                <label for="time">Time (4–285):</label>
-                <input type="number" id="time" name="time" placeholder="Enter follow-up days" min="4" max="285" required>
-            </div>
-
-            <button type="submit">Predict</button>
-        </form>
-
-        <div class="result">
-            <h3>{{ prediction_text }}</h3>
-            <h3>{{ probability_text }}</h3>
         </div>
+        <footer>
+            <p>&copy; 2024 Medical Diagnosis System. All rights reserved.</p>
+        </footer>
     </div>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
 
